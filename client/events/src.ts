@@ -1,8 +1,9 @@
-import { Harmony } from "../config/deps.ts";
+import { Harmony, MongoClient } from "../config/deps.ts";
 import { Command, Event } from "../config/events.d.ts";
 
 export async function ExecuteEvents(
 	client: Harmony.Client,
+	database: MongoClient,
 	commands: Map<string, Command>,
 ) {
 	for (const FileEvent of Deno.readDirSync("./client/events")) {
@@ -11,7 +12,9 @@ export async function ExecuteEvents(
 		const File = (await import(`./${FileEvent.name}`)).default as Event;
 		if (!File) continue;
 
-		client[File.type](File.event, (...args) => File.script(client, commands, ...args));
+		client[File.type](File.event, (...args) =>
+			File.script(client, commands, database, ...args),
+		);
 	}
 
 	return;

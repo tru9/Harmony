@@ -1,9 +1,13 @@
 {
     "deno.enable": true,
     "deno.lint": true,
-    "deno.unstable": false,
+    "deno.unstable": true,
     "cSpell.words": [
-        "fullscreen"
+        "fullscreen",
+        "kickable",
+        "rbxwhois",
+        "Strombré",
+        "unwarn"
     ],
     "search.sortOrder": "type"
 }
