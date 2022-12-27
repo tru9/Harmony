@@ -29,7 +29,7 @@ export async function CreateUser(
 	data: Roblox,
 	mongo: MongoClient,
 ) {
-	const database = mongo.database("Strombre").collection<UserSchema>("users");
+	const database = mongo.database("").collection<UserSchema>("users");
 
 	if (await database.findOne({ id: user.id })) {
 		return await database.findAndModify(
